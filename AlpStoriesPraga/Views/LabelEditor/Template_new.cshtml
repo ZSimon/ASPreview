@@ -1,0 +1,209 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
+}
+<div class="label">
+    <div id="rl" class="ribbon-left">
+        <div class="ribbon-left-top"></div>
+        <div class="ribbon-left-middle"></div>
+        <div class="ribbon-left-bottom"></div>
+    </div>
+    <object id="testTemplate" type="image/svg+xml" data="@ViewBag.Template" class="cs1"></object>
+    <div class="ribbon-right">
+        <div src="#" class="ribbon-right-bottom">
+            <div class="productId"></div>
+            <img id="imgBr" alt="">
+            <div class="productPrice"></div>
+        </div>
+        <div class="ribbon-right-top">
+            <img id="qrCode" alt="">
+        </div>
+        <div class="ribbon-right-middle">
+            <div class="productBestbefore"></div>
+            <div class="productManufacturer"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function pausecomp(millis) {
+        var date = new Date();
+        var curDate = null;
+
+        do { curDate = new Date(); }
+        while (curDate - date < millis);
+    }
+
+    var productId = '@ViewBag.ProductId';
+    $(window).on("load", function () {
+
+        /*
+            var getTemplate = {
+                "success": true,
+                "msg:": "",
+                "data": {
+                    "bgImage": "./img/bottle/bath_salt.jpg",
+                    "elements": "INGRIDIENTS: Helianthus Annuus Seed Oil, Prunus Amygdalus Dulcis Oil, Tocopheryl AcetatePelargonium Graveolens Flower Oil, Rosmarinus Officinalis Leaf Oil, Lavandula Angustifolia Oil, Linalool, d-Limonene, Geraniol, Limonene, Citral, Citronellol",
+                    "description": "<b>Massage oil based on sunflower and sweet almond oil is enriched with lavander essential oil, rose geranium essential oil, rosemary essential oil.</b>",
+                    "usage": "USAGE: Apply evenly and massage into skin. <br>CAUTION:For external use only. Avoid contact with eyes. Keep out of reach of children.",
+                    "bestbefore": "EXP. DATE: 29.04.2016<br><br><br>After opening store in a cool and dark place.",
+                    "manufacturer": "<b>Made in EU</b><br>MANUFACTURER: Vastok d.o.o., Dunajska cesta 136, 1000 Ljubljana, Slovenia.<br><b>www.alpstories.com</b>",
+                    "productId": "H10000260002412051630",
+                    "productName": "Best product ever",
+                    "price": "PRICE: 13.55 eur",
+                    "quantity": "250ml",
+                    "barCode": "../content/img/codes/bc.png",
+                    "qrCode": "../content/img/codes/qr.png",
+                    "icons": ["./img/zajecBlk.svg", "./img/pet1Blk.svg", "./img/ALU41Blk.svg"]
+                }
+            };
+            */
+        var loadTemplate = function () {
+            var //templateActive = getTemplate.data,
+                ribbonLeft = $('.ribbon-left'),
+                ribbonRight = $('.ribbon-right'),
+                $obj = $('#testTemplate'),
+                svg = $($obj.contents().find('svg')[0]);
+            
+            var $size = $obj.attr('data').slice(-5).charAt(0);
+
+            $('.label').css({
+                'width': svg.width(),
+                'height': svg.height()
+            });
+
+            //Add data to ribbon
+            $('.ribbon-left-top').html(templateActive.elements);
+            $('.ribbon-left-middle').html(templateActive.description);
+            $('.ribbon-left-bottom').html(templateActive.usage);
+
+            $('.ribbon-right-top> img').attr('src', "../" + templateActive.qrCode);
+            $('.productBestbefore').html(templateActive.bestbefore);
+            $('.productManufacturer').html(templateActive.manufacturer);
+
+            //$('.productId').html(templateActive.productId);
+            $('.ribbon-right-bottom img').attr('src', "../" + templateActive.barCode);
+            //$('.productPrice').html(templateActive.price);
+
+            var ribbonEl = $(svg.find('#text_background_left')[0]);
+
+            var ribbonProp = {
+                'opacity': ribbonEl.css('opacity'),
+                'background': ribbonEl.css('fill'),
+                'visibility': 'hidden'
+            };
+
+            $("#qrCode").on('load', function () {
+                //$("#qrCode").addClass("qr1");
+                $("#qrCode").css('height', '10');
+                alert("x");
+            });//.height(200).width(200);
+
+            $('#imgBr').on('load', function () {
+                
+                if ($size == 1) {
+                    
+                    $("#imgBr").addClass("br1");
+                    $obj.removeClass().addClass('cs1');
+                    ribbonLeft.css("fontSize", "28px");
+                    ribbonRight.css("fontSize", "28px");
+                } else {
+                    $("#imgBr").addClass("br3");
+                    $obj.removeClass().addClass('cs3');
+                    ribbonLeft.css("fontSize", "18px");
+                    ribbonRight.css("fontSize", "18px");
+                }
+
+                // Get height and width of ribbons
+                var ribbonSVGLeft = svg.find('#text_background_left')[0].getBoundingClientRect();
+                //var ButtonStripe = svg.find('#Button_Stripe')[0].getBoundingClientRect();
+
+                var barcCode = $('.ribbon-right-bottom');
+                var leftRibbonWidth;
+
+                //$('ribbon - left')
+                /*
+                if ($size == 1) {
+                    leftRibbonWidth = 240;
+                } else {
+                    leftRibbonWidth = ribbonLeft.width();
+                }
+                */
+                leftRibbonWidth = $('#rl').width();
+
+                var rightRibbonWidth = ribbonRight.width();
+                var barcodeWidth = barcCode.width();
+
+                if (barcodeWidth > rightRibbonWidth)
+                    rightRibbonWidth = barcodeWidth;
+
+                if (leftRibbonWidth >= rightRibbonWidth)
+                    ribbonProp.height = leftRibbonWidth;
+                else
+                    ribbonProp.height = rightRibbonWidth;
+
+                //if (leftRibbonWidth >= rightRibbonWidth) {
+                //    ribbonProp.height = leftRibbonWidth >= barcodeWidth ? leftRibbonWidth : barcodeWidth;
+                //} else {
+                //    ribbonProp.height = rightRibbonWidth >= barcodeWidth ? rightRibbonWidth : barcodeWidth;
+                //}
+                
+                ribbonProp.width = ribbonSVGLeft.height - 1;// - ButtonStripe.height;
+                
+                // Set properties
+                for (var key in ribbonProp) {
+                    ribbonRight.css(key, ribbonProp[key]);
+                    ribbonLeft.css(key, ribbonProp[key]);
+                }
+                ribbonLeft.add(ribbonRight).css('top', ribbonSVGLeft.height - 1);// - ButtonStripe.height);
+                ribbonLeft.add(ribbonRight).show();
+
+                $('.ribbon-right-middle').css({
+                    'padding-left': barcCode.height(),
+                    'padding-right': $('.ribbon-right-top').height()
+                });
+
+                ribbonLeft.add(ribbonRight).css('visibility', 'visible');
+            });
+        }
+
+        $.ajax({
+            url: '@Url.Action("labelTemplate","LabelEditor")' + '/' + productId,
+            type: "GET",
+            dataType: 'json',
+            success: function (data) {
+                //pausecomp(5000);
+                templateActive = data.template;
+                loadTemplate();
+            },
+            error: function () {
+            },
+            async: false
+        });
+
+    });
+
+    //function updateFont($obj, $size) {
+    //    var $objData = $obj.attr('data');
+
+    //    switch ($size) {
+
+    //        case 1:
+    //            $('.ribbon-right-bottom > img').css({
+    //                'height': '70px',
+    //                'width': '230px'
+    //            });
+    //            $("#qrCode").addClass("qr1");
+    //            $("#brCode").addClass("br1");
+    //            $obj.removeClass().addClass('cs1');
+    //            break;
+    //        case 3:
+    //            $('.ribbon-right-bottom > img').css({
+    //                'height': '70px',
+    //                'width': '230px'
+    //            });
+    //            $("#qrCode").addClass("qr3");
+    //            $("#brCode").addClass("br3");
+    //            $obj.removeClass().addClass('cs3');
+    //    }
+    //}
+</script>

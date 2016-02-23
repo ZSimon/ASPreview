@@ -1,0 +1,261 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
+}
+<div class="label">
+    <div class="ribbon-left">
+        <div class="ribbon-left-top"></div>
+        <div class="ribbon-left-middle"></div>
+        <div class="ribbon-left-bottom"></div>
+    </div>
+    <object id="testTemplate" type="image/svg+xml" data="@ViewBag.Template" class="cs1"></object>
+    <div class="ribbon-right">
+        <div src="#" class="ribbon-right-bottom">
+            <div class="productId"></div>
+            <img id="imgBr" alt="">
+            <div class="productPrice"></div>
+        </div>
+        <div class="ribbon-right-top">
+            <img id="qrCode" alt="">
+        </div>
+        <div class="ribbon-right-middle">
+            <div class="productBestbefore"></div>
+            <div class="productManufacturer"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function pausecomp(millis) {
+        var date = new Date();
+        var curDate = null;
+
+        do { curDate = new Date(); }
+        while (curDate - date < millis);
+    }
+    var productId = '@System.Web.HttpContext.Current.Session["productId"]';
+
+    $(window).on("load", function () {
+        var getTemplate = {
+            "success": true,
+            "msg:": "",
+            "data": {
+                "bgImage": "./img/bottle/bath_salt.jpg",
+                "elements": "INGRIDIENTS: Helianthus Annuus Seed Oil, Prunus Amygdalus Dulcis Oil, Tocopheryl AcetatePelargonium Graveolens Flower Oil, Rosmarinus Officinalis Leaf Oil, Lavandula Angustifolia Oil, Linalool, d-Limonene, Geraniol, Limonene, Citral, Citronellol",
+                "description": "<b>Massage oil based on sunflower and sweet almond oil is enriched with lavander essential oil, rose geranium essential oil, rosemary essential oil.</b>",
+                "usage": "USAGE: Apply evenly and massage into skin. <br>CAUTION:For external use only. Avoid contact with eyes. Keep out of reach of children.",
+                "bestbefore": "EXP. DATE: 29.04.2016<br><br><br>After opening store in a cool and dark place.",
+                "manufacturer": "<b>Made in EU</b><br><br>MANUFACTURER: Vastok d.o.o., Dunajska cesta 136, 1000 Ljubljana, Slovenia.<br><b>www.alpstories.com</b>",
+                "productId": "H10000260002412051630",
+                "productName": "Best product ever",
+                "price": "PRICE: 13.55 eur",
+                "quantity": "220ml",
+                "barCode": "./ASstytic/bc.png",
+                "qrCode": "./ASstytic/qr.png",
+                "icons": ["./img/zajecBlk.svg", "./img/pet1Blk.svg", "./img/ALU41Blk.svg"]
+            }
+        };
+
+        var templateActive = getTemplate.data,
+            ribbonLeft = $('.ribbon-left'),
+            ribbonRight = $('.ribbon-right'),
+            $obj = $('#testTemplate'),
+            svg = $($obj.contents().find('svg')[0]),
+            bottleSize = $('object').attr('data').split('.')[0].split('_').pop();
+
+
+        $('.label').css({
+            'width': svg.width(),
+            'height': svg.height()
+        });
+
+        if (bottleSize > 1) {
+            ribbonLeft.add(ribbonRight).css('font-size', '19px');
+            $('.ribbon-right-bottom > img').css({
+                'height': '70px',
+                'width': '230px'
+            });
+            $('.ribbon-right-top > img').css({
+                'height': '100px',
+                'width': '100px'
+            });
+            $('.ribbon-right-bottom > .productId').css('font-size', '23px');
+        } else {
+            ribbonLeft.add(ribbonRight).css('font-size', '19px');
+            $('.ribbon-right-bottom > img').css({
+                'height': '70px',
+                'width': '230px'
+            });
+            $('.ribbon-right-top > img').css({
+                'height': '100px',
+                'width': '100px'
+            });
+            $('.ribbon-right-bottom > .productId').css('font-size', '23px');
+        }
+
+        //Add data to ribbon
+        $('.ribbon-left-top').html(templateActive.elements);
+        $('.ribbon-left-middle').html(templateActive.description);
+        $('.ribbon-left-bottom').html(templateActive.usage);
+
+        $('.ribbon-right-top> img').attr('src', "../" + templateActive.qrCode);
+        $('.productBestbefore').html(templateActive.bestbefore);
+        $('.productManufacturer').html(templateActive.manufacturer);
+
+        $('.productId').html(templateActive.productId);
+        $('.ribbon-right-bottom img').attr('src', "../" + templateActive.barCode);
+        $('.productPrice').html(templateActive.price);
+
+        var ribbonEl = $(svg.find('#text_background_left')[0]);
+        var ribbonProp = {
+            'opacity': ribbonEl.css('opacity'),
+            'background': ribbonEl.css('fill'),
+            'visibility': 'hidden'
+        };
+
+        // Get height and width of ribbons
+        var ribbonSVGLeft = svg.find('#text_background_left')[0].getBoundingClientRect();
+        var ButtonStripe = svg.find('#Button_Stripe')[0].getBoundingClientRect();
+
+        var barcCode = $('.ribbon-right-bottom');
+        var leftRibbonWidth = ribbonLeft.width();
+        var rightRibbonWidth = ribbonRight.width();
+        var barcodeWidth = barcCode.width();
+
+        if (leftRibbonWidth >= rightRibbonWidth) {
+            ribbonProp.height = leftRibbonWidth >= barcodeWidth ? leftRibbonWidth : barcodeWidth;
+        } else {
+            ribbonProp.height = rightRibbonWidth >= barcodeWidth ? rightRibbonWidth : barcodeWidth;
+        }
+        ribbonProp.width = ribbonSVGLeft.height - ButtonStripe.height;
+        // Set properties
+        for (var key in ribbonProp) {
+            ribbonRight.css(key, ribbonProp[key]);
+            ribbonLeft.css(key, ribbonProp[key]);
+        }
+        ribbonLeft.add(ribbonRight).css('top', ribbonSVGLeft.height - ButtonStripe.height);
+        ribbonLeft.add(ribbonRight).show();
+
+        // Ribbon position trick
+        $('#imgBr').on('load', function () {
+            $('.ribbon-right-middle').css({
+                'padding-left': barcCode.height(),
+                'padding-right': $('.ribbon-right-top').height()
+            });
+            ribbonLeft.add(ribbonRight).css('visibility', 'visible');
+        });
+    });
+
+    $(window).on("load", function () {
+        
+        
+            var loadTemplate = function () {
+                var //templateActive = getTemplate.data,
+                    ribbonLeft = $('.ribbon-left'),
+                    ribbonRight = $('.ribbon-right'),
+                    $obj = $('#testTemplate'),
+                    svg = $($obj.contents().find('svg')[0]);
+                
+                var $size = $obj.attr('data').slice(-5).charAt(0);
+                
+                if ($size == 1) {
+                    $obj.removeClass().addClass('cs1');
+                    ribbonLeft.css("fontSize", "28px");
+                    ribbonRight.css("fontSize", "28px");
+                } else {
+                    $obj.removeClass().addClass('cs3');
+                    ribbonLeft.css("fontSize", "18px");
+                    ribbonRight.css("fontSize", "18px");
+                }
+
+                $('.label').css({
+                    'width': svg.width(),
+                    'height': svg.height()
+                });
+
+                //Add data to ribbon
+                $('.ribbon-left-top').html(templateActive.elements);
+                $('.ribbon-left-middle').html(templateActive.description);
+                $('.ribbon-left-bottom').html(templateActive.usage);
+
+                $('.ribbon-right-top> img').attr('src', "../" + templateActive.qrCode);
+                $('.productBestbefore').html(templateActive.bestbefore);
+                $('.productManufacturer').html(templateActive.manufacturer);
+
+                //$('.productId').html(templateActive.productId);
+                $('.ribbon-right-bottom img').attr('src', "../" + templateActive.barCode);
+                $('.productPrice').html(templateActive.price);
+
+                var ribbonEl = $(svg.find('#text_background_left')[0]);
+                
+                var ribbonProp = {
+                    'opacity': ribbonEl.css('opacity'),
+                    'background': ribbonEl.css('fill'),
+                    'visibility': 'hidden'
+                };
+
+                // Get height and width of ribbons
+                var ribbonSVGLeft = svg.find('#text_background_left')[0].getBoundingClientRect();
+                //var ButtonStripe = svg.find('#Button_Stripe')[0].getBoundingClientRect();
+
+                var barcCode = $('.ribbon-right-bottom');
+                var leftRibbonWidth = ribbonLeft.width();
+                var rightRibbonWidth = ribbonRight.width();
+                var barcodeWidth = barcCode.width();
+
+                if (leftRibbonWidth >= rightRibbonWidth) {
+                    ribbonProp.height = leftRibbonWidth >= barcodeWidth ? leftRibbonWidth : barcodeWidth;
+                } else {
+                    ribbonProp.height = rightRibbonWidth >= barcodeWidth ? rightRibbonWidth : barcodeWidth;
+                }
+                ribbonProp.width = ribbonSVGLeft.height - 1;// - ButtonStripe.height;
+                // Set properties
+                for (var key in ribbonProp) {
+                    ribbonRight.css(key, ribbonProp[key]);
+                    ribbonLeft.css(key, ribbonProp[key]);
+                }
+                ribbonLeft.add(ribbonRight).css('top', ribbonSVGLeft.height - 1);// - ButtonStripe.height);
+                ribbonLeft.add(ribbonRight).show();
+
+                $("#qrCode").on('load', function () {
+                    //if ($size == 1)
+                    //    $("#qrCode").addClass("qr1");
+                    //else
+                    //    $("#qrCode").addClass("qr3");
+
+                });
+
+                // Ribbon position trick
+                $('#imgBr').on('load', function () {
+                    if ($size == 1)
+                        $("#imgBr").addClass("br1");
+                    else
+                        $("#imgBr").addClass("br3");
+
+                    $('.ribbon-right-middle').css({
+                        'padding-left': barcCode.height(),
+                        'padding-right': $('.ribbon-right-top').height()
+                    });
+
+                    ribbonLeft.add(ribbonRight).css('visibility', 'visible');
+                });
+            }
+
+            $.ajax({
+                url: '@Url.Action("labelTemplate","LabelEditor")' + '/' + 8,
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    
+                    //pausecomp(5000);
+                    templateActive = data.template;
+                    loadTemplate();
+                },
+                error: function () {
+                },
+                async: false
+            });
+
+
+    });
+
+</script>

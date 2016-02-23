@@ -1,0 +1,744 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+body{
+    background: url("../img/texture_1.png");
+}
+
+
+/*  must be removed  */
+.drop-down-content{
+    background: transparent;
+    position: absolute;
+    overflow: hidden;
+    right: -20px;
+    top: 5px;
+    height: 0;
+    width: 0;
+    border: 0;
+    z-index: 1;
+}
+.drop-down-list {
+    background-color: #fff;
+    background-color: rgba(255,255,255,.5);
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 250px;
+}
+.drop-down-item{
+    padding: 8px 12px;
+    /*color: #225428;*/ /*#e87772*/
+    text-transform: uppercase;
+
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+.drop-down-item span{
+    display: block;
+}
+.drop-down-item:hover,
+.drop-down-item.active{
+    background-color: rgba(34, 84, 40, 0.8);/*#F2AEAB*/
+    color: #fff;
+}
+/********  ********/
+
+
+.light_bg {
+    position: fixed;
+    z-index: 1071;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.product-details {
+    position: absolute;
+    background-color: #fff;
+    width: calc(100% - 120px);
+    height: calc(100% - 68px);
+    left: 60px;
+    top: 34px;
+    z-index: 1500;
+    border: 15px solid #fff;
+    overflow: auto;
+    overflow-x: hidden;
+}
+.details-container,
+.tabs-line{
+    width: 1000px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.product-detail-image,
+.product-detail-info{
+    position: relative;
+    box-sizing: border-box;
+    min-height: 550px;
+}
+.product-detail-image{
+
+}
+.product-detail-image > div{
+    z-index: 150;
+    transform-origin: 250px 250px;
+}
+.product-detail-image > iframe{
+    width: 100%;
+    height: 100%;
+    border: 0 none;
+}
+.product-detail-image > *{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.product-detail-image .back-cover{
+    opacity: 0;
+    background-color: #225428;/*225428*/
+    visibility: hidden;
+    position: absolute;
+    z-index: 150;
+
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+.product-detail-image .back-cover.active{
+    visibility: visible;
+    opacity: .1;
+}
+.detail-info{
+
+}
+.detail-info .title{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0 0 15px 5px;
+}
+.detail-info .tabs-line{
+    width: auto;
+    bottom: auto;
+    position: relative;
+    margin-bottom: 10px;
+}
+.tabs-line{
+    bottom: 48px;
+    z-index: 100;
+    position: fixed;
+    padding-bottom: 8px;
+    background: #E7E7E7;
+}
+.product-nav-tabs{
+    width: 100%;
+    background: #fff;
+    font-size: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0 0 5px 0;
+}
+.product-nav-tabs li{
+    display: inline-block;
+}
+.product-nav-tabs a{
+    text-transform: uppercase;
+    border: 0 none;
+    border-bottom: 2px #B6D8BC; /*648768*/ /*B6D8BC*/ /*BBD4BE*/
+    color: #225428;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: 35px;
+    padding: 0 0 5.5px 0;
+
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.product-nav-tabs a:hover,
+.product-nav-tabs .active a{
+    color: #225428;
+    text-decoration: none;
+    border-bottom: 8px solid #225428;
+}
+.dispNone{
+    display: none !important;
+}
+.dispBlock{
+    display: block !important;
+}
+
+.tooltip{
+    z-index: 0;
+}
+.tooltip:hover:after{
+    background: gold;
+    background: rgba(255, 215, 0, .5);
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 1px solid gold;
+    top: -34px;
+    color: #225428;
+    content: attr(data-title);
+    right: 0;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    min-width: 40px;
+    white-space: nowrap;
+    text-transform: capitalize;
+}
+.tooltip:hover:before{
+    border: solid;
+    border-color: rgba(255, 215, 0, .5) transparent;
+    border-width: 6px 6px 0 6px;
+    top: -5px;
+    content: "";
+    right: 48%;
+    right: calc(50% - 6px);
+    position: absolute;
+    z-index: 99;
+}
+.tooltip:hover{
+    z-index: 10000 !important;
+}
+.tooltip:before:hover,
+.tooltip:after:hover{
+    display: none;
+}
+
+.unselectable{
+    user-select: none;
+    -o-user-select:none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+}
+.size-block{
+    display: table;
+    left: auto;
+    right: 0;
+}
+.size-block > *{
+    float: right;
+    margin: 0;
+    margin-left: 10px;
+    display: table-cell;
+}
+.prod-tabs-line{
+    /*z-index: 1000;*/
+    border-radius: 5px;
+    font-size: 14px !important;
+}
+.prod-tabs-line:hover{
+    z-index: 1000;
+    /*background-color: rgba(255, 215, 0, .1);*/
+}
+
+.drop-down-par{
+    position: relative;
+    display: inline-block;
+}
+.drop-down-par > div.drop-down-content{
+    right: auto !important;
+    left: -10px;
+    top: 20px;
+
+    -webkit-transition: height .1s ease-in-out;
+    transition: height .1s ease-in-out;
+}
+.drop-down-par:hover > div{
+    height: auto;
+    /*z-index: 1000;*/
+    min-width: 130px;
+    max-width: 250px;
+    overflow: visible;
+
+    border: 10px solid rgba(0, 0, 0, 0);
+}
+.drop-down-par,
+.drop-down-par > span{
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.drop-down-par > span:hover{
+    color: gold;
+}
+.drop-down-par ul{
+    overflow: visible;
+    background-color: rgba(255,255,255,.4);
+}
+.drop-down-par li{
+    position: relative;
+    text-transform: capitalize;
+}
+.drop-down-par div.ingredient-image{
+    width: 50px;
+    height: 50px;
+    top: -30%;
+    right: -48%;
+    left: auto;
+    opacity: 0;
+
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.drop-down-par li:hover div{
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+.drop-down-par li:hover,
+.drop-down-par li.active{
+    background-color: transparent;
+    color: gold;
+}
+
+.ingredients{
+    overflow: hidden;
+    min-height: 50px;
+    max-height: calc(3 * 75px + 22px);
+    position: relative;
+}
+.ingredients.ps-container>.ps-scrollbar-y-rail>.ps-scrollbar-y{
+    background-color: gold !important;
+}
+.nodeKnob > ul{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.nodeKnob .ingredient{
+    top: 0;
+    left: 0;
+    opacity: .8;
+    /*width: 70px;
+    height: 70px;*/
+    position: absolute;
+    border-radius: 50%;
+
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+
+    -webkit-transition: -webkit-transform .3s/*, opacity .5s*/ ease-in-out;
+    -moz-transition: -moz-transform .3s/*, opacity .5s*/ ease-in-out;
+    -o-transition: -o-transform .3s/*, opacity .5s*/ ease-in-out;
+    transition: transform .3s/*, opacity .5s*/ ease-in-out;
+}
+
+.nodeKnob .ingredient.active{
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.nodeKnob .ingredient.hide{
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+}
+.nodeKnob.open{
+    z-index: 151;
+}
+.nodeKnob.hide{
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+}
+.ingredient:hover{
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+.ingredient.active:hover{
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+}
+.drop-down-item.active:hover div.ingredient-image{
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+}
+.drop-down-item.active.hover,
+.ingredient.active.hover{
+    -webkit-animation: mysec .3s ;
+    -moz-animation: mysec .3s ;
+    -o-animation: mysec .3s ;
+    animation: hover .3s ;
+}
+
+@-webkit-keyframes hover {
+    0% {-webkit-transform: scale(1);}
+    30% {-webkit-transform: scale(0.8);}
+    65% {-webkit-transform: scale(1.2);}
+    85% {-webkit-transform: scale(0.9);}
+    95% {-webkit-transform: scale(1.1);}
+    100% {-webkit-transform: scale(1);}
+}
+@-moz-keyframes hover {
+    0% {-moz-transform: scale(1);}
+    30% {-moz-transform: scale(0.8);}
+    65% {-moz-transform: scale(1.2);}
+    85% {-moz-transform: scale(0.9);}
+    95% {-moz-transform: scale(1.1);}
+    100% {-moz-transform: scale(1);}
+}
+@-o-keyframes hover {
+    0% {-o-transform: scale(1);}
+    30% {-o-transform: scale(0.8);}
+    65% {-o-transform: scale(1.2);}
+    85% {-o-transform: scale(0.9);}
+    95% {-o-transform: scale(1.1);}
+    100% {-o-transform: scale(1);}
+}
+@keyframes hover {
+    0% {transform: scale(1);}
+    30% {transform: scale(0.8);}
+    65% {transform: scale(1.2);}
+    85% {transform: scale(0.9);}
+    95% {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
+
+.ingredient:hover .ingredient-add div{
+    background: transparent url("../img/close-green.png") no-repeat center;
+}
+.ingredient:hover .ingredient-add i{
+
+}
+.ingredient:hover .ingredient-image{
+    border-color: gold;
+    /*border-color: #225428;*/
+}
+.ingredient-main.hide{
+    padding: 0;
+    height: 0;
+    display: none;
+}
+.ingredient-image{
+    /*top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;*/
+    top: 13.5%;
+    left: 13.5%;
+    width: 73%;
+    height: 73%;
+    z-index: 10;
+    position: absolute;
+    background: #fff no-repeat center;
+    background-size: contain;
+    border: 1px solid #dedede;/*#E2E2E2*/
+    border-radius: 50%;
+    cursor: pointer;
+
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+.ingredient.active .ingredient-image{
+    /*top: 13.5%;
+    left: 13.5%;
+    width: 73%;
+    height: 73%;*/
+}
+.nodeKnob .ingredient canvas{
+
+}
+.ingredient-image:hover{
+
+}
+.ingredient-image + div{
+
+}
+.ingredient-name{
+
+}
+.ingredient-name > *{
+    /*margin-left: 15px;*/
+    margin: 10px 0px;
+    cursor: pointer;
+}
+.ingredient-add{
+    width: 35px;
+    display: table-cell;
+    /*vertical-align: middle;*/
+}
+.ingredient-add > *{
+    width: 25px;
+    height: 25px;
+    background: url("../img/close-gold.png") no-repeat center;
+    cursor: pointer;
+
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+.ingredient-add > i{
+    display: block;
+    margin-top: 20px;
+    background: transparent url("../img/arrow-right-green.png") no-repeat center;
+
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.ingredient-desc{
+    /*display: none;*/
+    /*background-color: #2c2c2c;*/
+    /*color: gold;*/
+    margin: 10px 0px;
+}
+.nodeKnob{
+    opacity: 1;
+    border-radius: 50%;
+    position: absolute;
+    display: block;
+
+    -webkit-transition: -webkit-transform .15s ease-in-out;
+    -moz-transition: -moz-transform .15s ease-in-out;
+    -o-transition: -o-transform .15s ease-in-out;
+    transition: transform .15s ease-in-out;
+
+}
+.knob{
+    width: 50px;
+    visibility: hidden;
+    position: absolute;
+}
+
+.tool-tip{
+
+}
+.tool-tip:hover:after{
+    background: gold;
+    background: rgba(255, 215, 0, .5);
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 1px solid gold;
+    bottom: 51px;
+    color: #225428;
+    content: attr(data-title);
+    right: 0;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    min-width: 40px;
+    white-space: nowrap;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+.tool-tip:hover:before{
+    border: solid;
+    border-color: rgba(255, 215, 0, .5) transparent;
+    border-width: 6px 6px 0 6px;
+    top: -8px;
+    content: "";
+    right: 48%;
+    right: calc(50% - 6px);
+    position: absolute;
+    z-index: 99;
+}
+.tool-tip:before:hover,
+.tool-tip:after:hover{
+    display: none;
+}
+
+.price-table{
+    margin: 15px 0;
+    width: 100%;
+}
+.price-table ul{
+    margin-top: 1px;
+    margin-bottom: 0px;
+}
+.price-table ul li{
+    background-color: #fafafa;
+}
+.price-table li{        /*.ingredient*/
+    margin-top: -1px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #eee;
+    display: table;
+    box-sizing: border-box;
+}
+.price-table > li:first-child{
+    background-color: #efefef;
+}
+.price-table > li:last-child{
+    background-color: #eee;
+}
+.price-table li > span{
+    display: table-cell;
+}
+.price-table li > :nth-child(2){
+    width: 30%;
+}
+.price-table li > :nth-child(3){
+    width: 80px;
+    font-weight: bold;
+}
+.price-table li > span:last-child{
+    width: 20px;
+}
+.price-table li > :last-child i{
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background: url("../img/close-gold.png") no-repeat center;
+    border: 1px transparent solid;
+    cursor: pointer;
+
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+
+.product-desc-list{
+    margin-top: 15px;
+    padding: 0px 10px 10px;
+    /*padding-top: 40px;*/
+    position: relative;
+    float: right;
+    width: 50%;
+    max-height: 300px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.product-desc-list li{
+    padding: 5px 10px;
+    margin: 5px 0px;
+    /*background: #fff;*/
+    border-radius: 5px;
+}
+.product-desc-list h2{
+    margin: 10px 0;
+}
+.desc-image{
+    float: left;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid #eee;
+    background: #fff no-repeat center;
+    background-size: contain;
+    margin-right: 10px;
+}
+
+
+.purchase-area{
+    /*width: 50%;*/
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+.purchase-area > div{
+    float: right;
+}
+.match-to-my-profile,
+.create-label{
+    float: left;
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    cursor: pointer;
+    border: 2px solid #225428;
+    background: #fff;
+    color: #225428;
+    padding: 8px 11px;
+    text-transform:uppercase;
+
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+}
+.create-label{
+    left: 20px;
+    position: relative;
+    float: left;
+}
+.match-to-my-profile:hover,
+.create-label:hover{
+    background: #225428;
+    color: #fff;
+}
+.overview .prices{
+    margin: 10px 5px;
+    padding: 0px !important;
+    border: 0px !important;
+}
+.overview .add-to-cart-panel{
+    float: right;
+}
+.overview .add-to-cart-button, .variant-overview .add-to-cart-button{
+    border: 2px solid #225428;
+    background: #fff;
+    color: #225428;
+}
+.overview .add-to-cart-button:hover, .variant-overview .add-to-cart-button:hover{
+    background: #225428;
+    color: #fff !important;
+}
+.overview .product-price span, .variant-overview .product-price span{
+    color: #225428;
+}
+.overview .qty-input, .variant-overview .qty-input, .overview .qty-dropdown, .variant-overview .qty-dropdown{
+    color: #225428;
+    border: 2px solid #225428;
+}
+
+/**********   **********/
+
+.tablist{
+    position: relative !important;
+}
+.tablist > li{
+    z-index: 1;
+    position: relative;
+    text-transform: capitalize;
+}
+.tablist > li a{
+    -webkit-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+}
+.tablist > li:first-child{
+    z-index: 0;
+    width: 100%;
+    position: absolute;
+    left: 0;
+}
+.tablist > li:first-child a{
+    cursor: default;
+    border-bottom: 3px solid #FFEF99; /*rgba(55,200,0,.5)*/
+}
+.tablist > li:not(:first-child) a:hover,
+.tablist > li:not(:first-child) a.active{
+    border-bottom: 3px solid #225428 !important;
+}
+
+@media all and (min-width: 769px) {
+    .overview .buttons div {
+        margin: -10px 10px 0 0;
+    }
+}

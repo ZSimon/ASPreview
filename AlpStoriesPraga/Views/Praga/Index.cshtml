@@ -1,0 +1,106 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPraga.cshtml";
+    ViewBag.Title = "Alp stories";
+}
+<div class="pres-container">
+    <div class="header">
+        <div class="sub-header">
+            <div class="logo">
+                <img src="~/content/img/AS.png">
+            </div>
+            <div class="banner">
+                <img src="~/content/img/banner.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="panel_content" class="panel-content">
+            <div id="" class="product-essential">
+                <div class="gallery"></div>
+                <div class="overview">
+                    <div class="availability"></div>
+                </div>
+            </div>
+            <div id="close_editor" class="close" title="close"></div>
+            <div class="clear"></div>
+        </div>
+
+        <div id="products_section" class="products-section-0114">
+            <h1 class="page-title">Products</h1>
+            <div class="product-filter"></div>
+            <div class="product-row">
+                <h3 class="sub-title" id="color_safe">Alp stories products</h3>
+                <div class="row product-gallery">
+                    <div class="col-md-3 col-xs-6 col-sm-4 product" data-product="1">
+                        <div class="product-image">
+                            <img src="~/Content/Img/BMGinkgo.jpg" class="img-responsive" title="Body Milk Ginkgo" alt="Body Milk Ginkgo">
+                        </div>
+                        <!-- END div product-image -->
+                        <div class="product-title">Body Milk Vanilla&nbsp;</div>
+                        <div class="product-sub-title">Soft And Smooth</div>
+                        <div class="product-learn-more">Learn More</div>
+                        <div class="product-price">€11.00</div>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-sm-4 product" data-product="8">
+                        <div class="product-image">
+                            <img src="~/Content/Img/MOVanilla.jpg" class="img-responsive" title="Massage Oil Vanilla" alt="Massage Oil Vanilla">
+                        </div>
+                        <!-- END div product-image -->
+                        <div class="product-title">Massage Oil Lavender</div>
+                        <div class="product-sub-title">Protecting Your Skin</div>
+                        <div class="product-learn-more">Learn More</div>
+                        <div class="product-price">€11.00</div>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-sm-4 product" data-product="11">
+                        <div class="product-image">
+                            <img src="~/Content/Img/SGMarigold.jpg" class="img-responsive" title="Shower Gel Marigold" alt="Shower Gel Marigold">
+                        </div>
+                        <!-- END div product-image -->
+                        <div class="product-title">Shower Gel Marigold</div>
+                        <div class="product-sub-title">Clean Your Skin</div>
+                        <div class="product-learn-more">Learn More</div>
+                        <div class="product-price">€13.00</div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="product-row">
+                <h3 class="sub-title" id="color_safe2">YASKAWA PRODUCTS</h3>
+                <div class="row product-gallery">
+                    <div class="col-md-3 col-xs-6 col-sm-4 product" data-product="25">
+                        <div class="product-image">
+                            <img src="~/Content/Img/SGYaskawa.jpg" class="img-responsive" title="Heart Lock It" alt="Color Safe Shampoo">
+                        </div>
+                        <!-- END div product-image -->
+                        <div class="product-title">Shower Gel Ginkgo</div>
+                        <div class="product-sub-title">Clean Your Skin</div>
+                        <div class="product-learn-more">Learn More</div>
+                        <div class="product-price">€11.00</div>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-sm-4 product" data-product="26">
+                        <div class="product-image">
+                            <img src="~/Content/Img/BMYaskawa.jpg" class="img-responsive" title="Love Unconditionally" alt="Color Safe Conditioner">
+                        </div>
+                        <!-- END div product-image -->
+                        <div class="product-title">Body Milk Ginkgo</div>
+                        <div class="product-sub-title">Soft And Smooth</div>
+                        <div class="product-learn-more">Learn More</div>
+                        <div class="product-price">€11.00</div>
+                    </div>
+                    <!--
+                    <div class="col-md-3 col-xs-6 col-sm-4 product"data-product="product_3">
+                        <div class="product-image">
+                            <img src="~/Content/Img/BMVanilla.jpg" class="img-responsive" title="Perfect Ending" alt="Leave-In Conditioner">
+                        </div>
+                        <div class="product-title">Perfect Ending&nbsp;</div>
+                        <div class="product-sub-title">Leave-In Conditioner</div>
+                        <div class="product-learn-more">Learn More</div>
+                        <div class="product-price">€11.00</div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+        @{ Html.RenderPartial("_Label"); }
+    </div>
+</div>

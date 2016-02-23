@@ -1,0 +1,116 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAlpStories.cshtml";
+    ViewBag.Title = "Alp stories";
+}
+
+<div class="container">
+    <div class="label-editor">
+        <div class="row">
+            <!------- Hidden element------->
+                <input name="load-image" type="file" id="load-image" />
+                <div class="templates-wrapper col-xs-12"></div>
+                <!---------------------------->
+                <div class="nav-bar col-md-4 col-xs-12 col-md-push-8">
+                    <!--<div class="title visible-md visible-lg">-->
+                    <!--<span>create label</span>-->
+                    <!--</div>-->
+                    <ul class="nav-property clearfix">
+                        <li class="title-save title visible-md visible-lg">
+                            <span>Save</span>
+                        </li>
+                        <li class="title-save title-mobile visible-xs visible-sm">
+                            S
+                        </li>
+                        <!--Upload template-->
+                        <li class="template-upload">
+                            <section>
+                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                <span class="hidden-xs">templates</span>
+                            </section>
+                        </li>
+                        <!-- Upload image-->
+                        <li class="image-upload">
+                            <section data-toggle="popover">
+                                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                <span class="hidden-xs">image</span>
+                            </section>
+                        </li>
+                        <!--Change image-->
+                        <li class="image-item-menu">
+                            <section data-toggle="popover">
+                                <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                <span class="hidden-xs">Transform</span>
+                            </section>
+                            <ul class="image-editor nav-property-items clearfix">
+                                <li class="image-item col-xs-10 col-sm-5">
+                                    <span>Rotate</span>
+                                    <div class="slider">
+                                        <input class="rotate-slider" type="range" min="0" max="360" step="0.5" value="0" />
+                                        <output class="rotate-slider-value">0%</output>
+                                    </div>
+                                </li>
+                                <li class="image-item col-xs-10 col-sm-5">
+                                    <span>Scale Image</span>
+                                    <div class="slider">
+                                        <input class="scale-imade-slider" type="range" min="0" max="2" step="0.001" value="0.2" />
+                                        <output class="scale-imade-slider-value">0.2</output>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--Change text-->
+                        <li class="text-item-menu">
+                            <section data-toggle="popover">
+                                <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
+                                <span class="hidden-xs">text</span>
+                            </section>
+                            <ul class="text-editor nav-property-items clearfix"></ul>
+                        </li>
+                        <!--Change color-->
+                        <li class="color-item-menu">
+                            <section data-toggle="popover">
+                                <span class="glyphicon glyphicon-adjust" aria-hidden="true"></span>
+                                <span class="hidden-xs">color</span>
+                            </section>
+                            <ul class="color-editor nav-property-items clearfix"></ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="label-wrapper col-md-8 col-xs-12 col-md-pull-4">
+                    <div class="label">
+                        <div class="ribbon-left">
+                            <div class="ribbon-left-top"></div>
+                            <div class="ribbon-left-middle"></div>
+                            <div class="ribbon-left-bottom"></div>
+                        </div>
+                        <div id="svg-template"></div>
+                        <div class="ribbon-right">
+                            <div class="ribbon-right-top">
+                                <img src="" alt="" />
+                            </div>
+                            <div src="#" class="ribbon-right-bottom">
+                                <div class="productId"></div>
+                                <img src="" alt="" />
+                                <div class="productPrice"></div>
+                            </div>
+                            <div class="ribbon-right-middle">
+                                <div class="productBestbefore"></div>
+                                <div class="productManufacturer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+@section Scripts{
+<script language="JavaScript">
+    var LabelUrlSettings = {
+        currentTemplateUrl: '@Url.Action("labelTemplate", "LabelEditor")',
+        uploadImageUrl: '@Url.Action("UploadImage", "LabelEditor")',
+        getTemplatesUrl: '@Url.Action("getTemplates", "LabelEditor")',
+        appPath: '@Server.MapPath("~")',
+        rootUrl: '@(Request.Url.GetLeftPart(UriPartial.Authority) + Url.Content("~"))'
+    }
+</script>
+}
