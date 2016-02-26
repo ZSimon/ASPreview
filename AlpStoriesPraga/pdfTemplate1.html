@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>AlpStories</title>
+    <style>
+        body {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .ribbon{
+            position:absolute;
+            background: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+    <object id="testTemplate" type="image/svg+xml" data="./content/UserTemplates/usrTpl_1.svg" height=" 500" width="600"></object>
+    <div id="ribbonLeft" class="ribbon">Left ribbon</div>
+    <div id="ribbonRight" class="ribbon">Right ribbon</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script>
+        document.getElementById("ribbonRight").innerText = "testfff";
+        //document.getElementById("testTemplate").setAttribute('data', "http://localhost/AlpStoriesPraga/Content/templates/HB1_1.svg");
+        $(document).ready(function () {
+            debugger;
+            return;
+            var $ribbonData="";
+            //var $lbl = GetURLParameter('lbl');
+            var $lbl = "usrTpl_2.svg";
+            //var $lbl = "usrTpl_1.svg";
+            var $url = "http://localhost/AlpStoriesPraga/Content/UserTemplates/" + $lbl;
+            var $obj = $('#testTemplate');
+            var $bothLoaded = false;
+            document.getElementById("testTemplate").setAttribute('data', $url);
+            $obj.on('load', function () {
+                return;
+                /*read values from svg*/
+                var $svg = $obj.contents();
+                var $svgRibbonLeft=$svg.find('#text_background_left');
+                var $svgRibbonRight=$svg.find('#text_background_right');
+                var $rectRibbonLeft = $svgRibbonLeft[0].getBoundingClientRect();
+                var $rectRibbonRight = $svgRibbonRight[0].getBoundingClientRect();
+                var $ribbonLeft = $('#ribbonLeft');
+                var $ribbonRight = $('#ribbonRight');
+                $ribbonLeft.attr("style", $svgRibbonLeft.attr('style').replace('fill','background'));
+                $ribbonRight.attr("style", $svgRibbonRight.attr('style').replace('fill', 'background'));
+                $ribbonLeft.css({ "top": $rectRibbonLeft.top, "left": $rectRibbonLeft.left, "height": $rectRibbonLeft.height });
+                var $rLeft=$rectRibbonRight.right-$ribbonRight.width();
+                $ribbonRight.css({ "top": $rectRibbonRight.top, "left": $rLeft, "height": $rectRibbonRight.height });
+                if($bothLoaded)
+                {
+                    addHtmlToRibbons();
+                } else
+                    $bothLoaded = true;
+            })
+
+            $.ajax({
+                url: './Server/ribbon.json',
+                type: "GET",
+                dataType: 'json',
+                success: function (data) {
+                    $ribbonData = data.data;
+                    if ($bothLoaded) {
+                        addHtmlToRibbons();
+                    } else
+                        $bothLoaded = true;
+                }
+            })
+        });
+
+        function addHtmlToRibbons() {
+            
+        }
+
+        function GetURLParameter(sParam) {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) {
+                    return sParameterName[1];
+                }
+            }
+        }
+
+        $jsonData = "";
+    </script>
+</body>
+</html>

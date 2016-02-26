@@ -1,0 +1,30 @@
+{"matched":0, "name":"Massage Oil AlpStories", "basePrice":7.41, "VAT":0.22, "currency": "$", "ingredients":[
+  {"category_id": 1, "name":"Scent", "removable":0, "editable":1,
+    "items":[
+      {"ingredient_id": 1, "name":"Chamomile", "icon":"chamomile.jpg", "description": "Natural fragrance with very fresh and indistinctively herbal scent.","min":0.15, "max": 2.6, "value": 1.8, "price": 2.3, "selected":0},
+      {"ingredient_id": 3, "name":"Cherry Berry", "icon":"cherry.jpg", "description":"Extremely sweet, yet refreshing scent that takes you in the summer shadow of cherry tree. Intense fragrance, suitable for those a bit more daring.","min":0.11, "max": 3.6, "value": 2.3, "price": 3.66, "selected":0},
+      {"ingredient_id": 6, "name":"Coconut", "icon":"coconut.jpg", "description":"Sweet, yet fresh coconut scent that reminds you of the long sandy beaches and sun glare in the turquoise blue sea. Smell that will bring summer freshness.","min":0, "max": 2.6, "value": 0.8, "price": 1.2, "selected":1},
+      {"ingredient_id": 9, "name":"Ginkgo", "icon":"ginkgo.jpg", "description":"Refreshing scent that leaves your skin feeling fresh. Ginko in combination with sea buckthorn gives your skin velvety soft experience.","min":0.13, "max": 4, "value": 3.1, "price": 1.43, "selected":0},
+      {"ingredient_id": 10, "name":"Lavender", "icon":"lavender.jpg", "description":"Aromatic clean note, medicinal on one end and licorice-like on the other end. It improves mood, reducec anxiety and soothes the spirit. Its distinct scent has many different notes that compliment each other in specific and unique ways. The sweet flowery aroma together with more refreshing notes put together that well known perfume we all love.","min":0.03, "max": 2.9, "value": 2.5, "price": 0.3, "selected":0},
+      {"ingredient_id": 16, "name":"Marigold", "icon":"marigold.jpg", "description": "Thick, almost sticky, resinous smelling floral note of individuality. Marigold has a complex, slightly musky scent with an unreserved warmth to it.","min":0.02, "max": 2.2, "value": 0.11, "price": 3.32, "selected":0}
+    ]
+  },{"category_id": 2, "name":"Minerals", "removable":0, "editable":0,
+    "items":[
+      {"ingredient_id": 2, "name":"Magnesium", "icon":"magnesium.jpg", "description": "Eating a diet rich in foods with Magnesium in them is one way to make sure that you're giving your scalp what it needs to growth strong and healthy hair. It's one of those minerals that you won't really notice you're not getting enough of until it becomes a chronic condition, and then you'll benefit greatly from righting the imbalance.","min":0.15, "max": 2.6, "value": 1.8, "price": 2.3, "selected":0},
+      {"ingredient_id": 4, "name":"Iron", "icon":"chamomile.jpg", "description":" Iron is an important mineral that your body needs adequate supplies of in order to function at its best in several areas, including growing hair. You may realize that beef is rich in iron, but there are plenty of other foods that are high in iron that you can eat without having to rely on red meat. Once you're making sure that you're getting enough iron and the other vitamins and minerals, you can seek out hair products that contain iron in order to see greater improvement.","min":0.11, "max": 3.6, "value": 2.3, "price": 3.66, "selected":1}
+    ]
+  },
+  {"category_id": 3, "name":"Extracts", "removable":1, "editable":0,
+    "items":[
+      {"ingredient_id": 7, "name":"Marigold", "icon":"marigold.jpg", "description": "Natural fragrance with very fresh and indistinctively herbal scent.","min":0.15, "max": 2.6, "value": 1.8, "price": 2.3, "selected":1},
+      {"ingredient_id": 12, "name":"Ginkgo", "icon":"ginkgo.jpg", "description":"Extremely sweet, yet refreshing scent that takes you in the summer shadow of cherry tree. Intense fragrance, suitable for those a bit more daring.","min":0.11, "max": 3.6, "value": 2.3, "price": 3.66, "selected":1},
+      {"ingredient_id": 17, "name":"Coconut", "icon":"coconut.jpg", "description":"Grapefruit is often revered as the “fruit of paradise” for its health promoting benefits as well as disease healing properties. It contains high amount of vitamin A and C, minerals and antioxidants that benefit the skin. In addition, the vitamin C protects the skin from environmental hazards. It also stimulates the production of skin collagen that brings smoothness and elasticity to the skin. The retinol antioxidant gives your skin softness and renews damaged skin and treats skin pigmentation.","min":0.02, "max": 2.1, "value": 0.3, "price": 2.1, "selected":0}
+    ]
+  },
+  {"category_id": 4, "name":"Oil", "removable":0,  "editable":0,
+    "items":[
+      {"ingredient_id": 5, "name":"Cherry Berry", "icon":"cherry.jpg", "description": "The rehydrating properties in apricot oil make it a natural moisturizer for any type of skin. This oil is light and does not leave a greasy coat on the skin after use. The high gamma linoleic acid content present in apricot oil enables your skin to maintain its moisture balance. This acid also helps tone and firm up the skin. The vitamin A and vitamin E present in apricot oil slow down the signs of ageing.","min":1.5, "max": 6, "value": 4, "price": 5.22, "selected":1},
+      {"ingredient_id": 15, "name":"Argan oil", "icon":"eucalyptus.jpg", "description": "Argan oil can act as a moisturizer for the scalp to fight dandruff and dry scalp. It can also promote the growth of hair and even undo some of the damage done through chemical treatments and dyes. It can be used to treat split ends.","min":1.0, "max": 6, "value": 4, "price": 5.22, "selected":0}
+    ]
+  }
+], "description":"Dirt particles and surplus fat are removed gently. A combination of valuable herbal extracts has a normalizing effect on the production of sebum. Inflammatory skin reactions are reduced, and your skin appears more fine pored, clear and fresh"}
