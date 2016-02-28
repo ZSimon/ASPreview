@@ -43,6 +43,9 @@
     <Reference Include="Dapper">
       <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Select.HtmlToPdf">
       <HintPath>..\packages\Select.HtmlToPdf.1.2.0.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
@@ -183,6 +186,24 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="3d_bottle\bottle3d.html" />
+    <Content Include="3d_bottle\css\bootstrap.min.css" />
+    <Content Include="3d_bottle\css\jquery-ui.min.css" />
+    <Content Include="3d_bottle\css\style.css" />
+    <Content Include="3d_bottle\data\img\logoimage.jpg" />
+    <Content Include="3d_bottle\data\img\metal-316803_640.jpg" />
+    <Content Include="3d_bottle\data\img\RepenGepolijst.jpg" />
+    <Content Include="3d_bottle\js\App.js" />
+    <Content Include="3d_bottle\js\App_new.js" />
+    <Content Include="3d_bottle\js\bootstrap.min.js" />
+    <Content Include="3d_bottle\js\dat.gui.js" />
+    <Content Include="3d_bottle\js\extra.js" />
+    <Content Include="3d_bottle\js\jquery-ui.min.js" />
+    <Content Include="3d_bottle\js\jquery.min.js" />
+    <Content Include="3d_bottle\js\modernizr.js" />
+    <Content Include="3d_bottle\js\three.loader.min.js" />
+    <Content Include="3d_bottle\js\three.min.js" />
+    <Content Include="3d_bottle\js\three.orbit.js" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\entryPage.css" />
     <Content Include="Content\css\labelEditor.css" />
@@ -191,6 +212,7 @@
     </Content>
     <Content Include="Content\css\spectrum.min.css" />
     <Content Include="Content\css\template.css" />
+    <Content Include="Content\css\template_old.css" />
     <Content Include="Content\Img\111111.jpg" />
     <Content Include="Content\Img\6M.svg" />
     <Content Include="Content\Img\6MBlk.svg" />
@@ -253,6 +275,7 @@
     <Content Include="Scripts\entryPage.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="test.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -284,17 +307,28 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <Content Include="3d_bottle\data\obj\bottle.mtl" />
+    <Content Include="3d_bottle\data\obj\bottle.obj" />
+    <Content Include="3d_bottle\data\obj\bottle_new.mtl" />
+    <Content Include="3d_bottle\data\obj\flaska1_7.mtl" />
+    <Content Include="3d_bottle\data\obj\flaska1_7.obj" />
+    <Content Include="3d_bottle\data\obj\large.mtl" />
+    <Content Include="3d_bottle\data\obj\large.obj" />
+    <Content Include="3d_bottle\data\obj\large1.mtl" />
+    <Content Include="3d_bottle\data\obj\large1.obj" />
+    <Content Include="3d_bottle\data\obj\najmanjsa.mtl" />
+    <Content Include="3d_bottle\data\obj\najmanjsa.obj" />
+    <Content Include="3d_bottle\data\obj\small.mtl" />
+    <Content Include="3d_bottle\data\obj\small.obj" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Shared\_LayoutPraga.cshtml" />
     <Content Include="Views\Praga\Index.cshtml" />
     <Content Include="Views\Shared\_Label.cshtml" />
     <None Include="Properties\PublishProfiles\PublishPraga.pubxml" />
-    <Content Include="Views\LabelEditor\Template.cshtml" />
-    <Content Include="Views\LabelEditor\Template - Copy.cshtml" />
-    <Content Include="Views\LabelEditor\Template - Copy %282%29.cshtml" />
-    <Content Include="Views\LabelEditor\Template - Copy %283%29.cshtml" />
+    <Content Include="Views\LabelEditor\Template_old.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\LabelEditor\Template.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

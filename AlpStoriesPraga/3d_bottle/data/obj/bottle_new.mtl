@@ -1,0 +1,36 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 24.08.2015 08:21:33
+newmtl wire_115115115
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.4510 0.4510 0.4510
+	Ks 0.3500 0.3500 0.3500
+	map_Kd 3d_bottle/data/img/RepenGepolijst.jpg
+	map_Ka 3d_bottle/data/img/RepenGepolijst.jpg
+newmtl Other
+	Ns 45.0000
+	Ni 1.5000
+	d 0.8000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000
+	illum 2
+	Ka 0.6314 0.6314 0.6314
+	Kd 0.6314 0.6314 0.6314
+	Ks 0.5850 0.5850 0.5850
+	Ke 0.0000 0.0000 0.0000
+newmtl Chrome
+	Ns 50.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000
+	illum 2
+	Ka 0.5608 0.5608 0.5608
+	Kd 0.9308 0.8908 0.79908
+	Ks 0.5400 0.5400 0.5400
+	Ke 0.0000 0.0000 0.0000
+map_Kd 3d_bottle/data/img/metal-316803_640.jpg

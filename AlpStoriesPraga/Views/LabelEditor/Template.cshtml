@@ -3,26 +3,47 @@
 }
 <div class="label">
     <div class="ribbon-left">
-        <div class="ribbon-left-top"></div>
-        <div class="ribbon-left-middle"></div>
-        <div class="ribbon-left-bottom"></div>
+        <div class="css-table" id="cssTableLeft">
+            <div class="css-row">
+                <div class="css-cell ribbon-left-middle">
+                    <div class="ribbon-left-middle-inner">
+                        <div class="productElements"></div>
+                        <div class="productDescription"></div>
+                        <div class="productUsage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+        <object id="testTemplate" type="image/svg+xml" data="@ViewBag.Template" class="@ViewBag.css"></object>
+        <div class="ribbon-right">
+            <div class="css-table" id="cssTableRight">
+                <div class="css-row">
+                    <div class="css-cell ribbon-right-bottom">
+                        <div class="ribbon-right-bottom-box">
+                            <div class="inner-rotate" id="inner-rotate">
+                                <div class="productId">H10000260002412051630</div>
+                                <img alt="" id="imgBr">
+                                <div class="productPrice"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="css-cell ribbon-right-middle">
+                        <div class="ribbon-right-middle-inner">
+                            <div class="productBestbefore rbnText"></div>
+                            <div class="productManufacturer"></div>
+                        </div>
+                    </div>
+
+                    <div class="css-cell ribbon-right-top">
+                        <img id="imgQr" alt="">
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-    <object id="testTemplate" type="image/svg+xml" data="@ViewBag.Template" class="@ViewBag.css"></object>
-    <div class="ribbon-right">
-        <div src="#" class="ribbon-right-bottom">
-            <div class="productId"></div>
-            <img id="imgBr" alt="">
-            <div class="productPrice"></div>
-        </div>
-        <div class="ribbon-right-middle">
-            <div class="productBestbefore "></div>
-            <div class="productManufacturer"></div>
-        </div>
-        <div class="ribbon-right-top">
-            <img id="qrCode" alt="">
-        </div>
-    </div>
-</div>
 
 <script type="text/javascript">
     function pausecomp(millis) {
@@ -34,125 +55,145 @@
     }
     var productId = '@ViewBag.ProductId';
     var bottleSize = @ViewBag.bottleSize;
+    var templateActive;
 
     $(window).on("load", function () {
-        
-        
-            var loadTemplate = function () {
-                var //templateActive = getTemplate.data,
-                    ribbonLeft = $('.ribbon-left'),
-                    ribbonRight = $('.ribbon-right'),
-                    $obj = $('#testTemplate'),
-                    svg = $($obj.contents().find('svg')[0]);
-                    //bottleSize = $('object').attr('data').split('.')[0].split('_').pop();
 
-                    $('.label').css({
-                        'width': svg.width(),
-                        'height': svg.height()
-                    });
-                    
-                    if (bottleSize > 1) {
-                        ribbonLeft.add(ribbonRight).css('font-size', '19px');
-                        templateActive.manufacturer=templateActive.manufacturer.replace("136,", "136,<br/>");
-                        
-                        $('.ribbon-right-bottom > img').css({
-                            'height': '90px',
-                            'width': '270px'
-                        });
-                        $('.ribbon-right-top > img').css({
-                            'height': '140px',
-                            'width': '140px'
-                        });
-                        $('.ribbon-right-bottom > .productId').css('font-size', '23px');
-                    } else {
-                        ribbonLeft.add(ribbonRight).css('font-size', '26px');
-                        $('.ribbon-right-bottom > img').css({
-                            'height': '120px',
-                            'width': '300px'
-                        });
-                        $('.ribbon-right-top > img').css({
-                            'height': '150px',
-                            'width': '150px'
-                        });
-                        $('.ribbon-right-bottom > .productId').css('font-size', '23px');
-                    }
+        var loadTemplate = function() {
+            var ribbonLeft =  $('.ribbon-left');
+            var ribbonRight = $('.ribbon-right');
+            var obj = $('#testTemplate');
+            var svg = $(obj.contents().find('svg')[0]);
+            var ribbonEl = $(svg.find('#text_background_left')[0]);
+            
+            $('.label').css({
+                'width': svg.width(),
+                'height': svg.height()
+            });
+            // Get height and width of ribbons
+            
 
-                //Add data to ribbon
-                    $('.ribbon-left-top').html(templateActive.elements);
-                    $('.ribbon-left-middle').html(templateActive.description);
-                    $('.ribbon-left-bottom').html(templateActive.usage);
+            var ribbonProp = {
+                'opacity': ribbonEl.css('opacity'),
+                'background': ribbonEl.css('fill')
+            };
 
-                    $('.ribbon-right-top> img').attr('src', "../" + templateActive.qrCode);
-                    //$('.productBestbefore :first').html(templateActive.bestBefore);
-                //$('.productManufacturer :first').html(templateActive.bestBefore);
-                    $('.productBestbefore').html(templateActive.bestBefore);
-                    $('.productManufacturer').html(templateActive.manufacturer);
-                    //$('.productId').html(templateActive.productId);
-                    $('.ribbon-right-bottom img').attr('src', "../../Content/Img/Codes/br.svg");// + templateActive.barCode);
-                    if (templateActive.price)
-                        $('.productPrice').html("Price: "+templateActive.price +" eur");
+            if (bottleSize === 1) {
+                $('#imgBr').css({
+                    'height': 70 +'px',
+                    'width': 230 + 'px'
+                });
 
-                    var ribbonEl = $(svg.find('#text_background_left')[0]);
-                    var ribbonProp = {
-                        'opacity': ribbonEl.css('opacity'),
-                        'background': ribbonEl.css('fill'),
-                        'visibility': 'hidden'
-                    };
+                $('#imgQr').css({
+                    'height': 200 +'px',
+                    'width': 200 + 'px'
+                });
 
-                // Get height and width of ribbons
-                    var ribbonSVGLeft = svg.find('#text_background_left')[0].getBoundingClientRect();
-                    var ribbonSVGRight = svg.find('#text_background_right')[0].getBoundingClientRect();
-                    //var ButtonStripe = svg.find('#Button_Stripe')[0].getBoundingClientRect();
+                ribbonLeft.add(ribbonRight).css('font-size', '23px');
 
-                    var barcCode = $('.ribbon-right-bottom');
-                    var leftRibbonWidth = ribbonLeft.width();
-                    var rightRibbonWidth = ribbonRight.width();
-                    var barcodeWidth = barcCode.width();
+            }else if(bottleSize === 3){
+                $('#imgBr').css({
+                    'height': 42 +'px',
+                    'width': 138 + 'px'
+                });
 
-                    if (leftRibbonWidth >= rightRibbonWidth) {
-                        ribbonProp.height = leftRibbonWidth >= barcodeWidth ? leftRibbonWidth : barcodeWidth;
-                    } else {
-                        ribbonProp.height = rightRibbonWidth >= barcodeWidth ? rightRibbonWidth : barcodeWidth;
-                    }
-                    /*ribbonProp.width = ribbonSVGLeft.height;*/
-                // Set properties
-                    for (var key in ribbonProp) {
-                        ribbonRight.css(key, ribbonProp[key]);
-                        ribbonLeft.css(key, ribbonProp[key]);
-                    }
-                    ribbonLeft.css("width", ribbonSVGLeft.height);
-                    ribbonRight.css("width", ribbonSVGRight.height);
+                $('#imgQr').css({
+                    'height': 140 +'px',
+                    'width': 140 + 'px'
+                });
 
-                    ribbonLeft.add(ribbonRight).css('top', ribbonSVGLeft.height );
-                    ribbonLeft.add(ribbonRight).show();
-
-
-                // Ribbon position trick
-                    $('#imgBr').on('load', function () {
-                        var paddingBottom = $(".ribbon-right-bottom").height();
-                        ribbonLeft.add(ribbonRight).css('visibility', 'visible');
-                        
-                        $(".ribbon-right-middle").css("padding-left", paddingBottom + 20 + "px");
-                        //$('.productManufacturer').html(templateActive.manufacturer);
-                        $(".ribbon-right-middle").css("padding-right", "-120px");
-                       ribbonLeft.add(ribbonRight).css('visibility', 'visible');
-                    });
+                ribbonLeft.add(ribbonRight).css('font-size', '12px');
             }
 
-            $.ajax({
-                url: '@Url.Action("labelTemplate","LabelEditor")' + '/' + productId,
-                type: "GET",
-                dataType: 'json',
-                success: function (data) {
-                    
-                    //pausecomp(5000);
-                    templateActive = data.template;
-                    loadTemplate();
-                },
-                error: function () {
-                },
-                async: false
+            $('.ribbon-right-top> img').attr('src', "../" + templateActive.qrCode);
+            $('.productBestbefore').html(templateActive.bestBefore);
+            $('.productManufacturer').html(templateActive.manufacturer);
+            
+            $('.productElements').html(templateActive.elements+"<p>");
+            $('.productDescription').html(templateActive.description+"<p>");
+            $('.productUsage').html(templateActive.usage);
+
+            $('.ribbon-right-bottom img').attr('src', "../" + templateActive.barCode);// + templateActive.barCode);
+
+            if (templateActive.price)
+                $('.productPrice').html("Price: "+templateActive.price +" eur");
+            
+            var ribbonSvgLeft = svg.find('#text_background_left')[0].getBoundingClientRect();
+            var ribbonSvgRight = svg.find('#text_background_right')[0].getBoundingClientRect();
+            
+            //var mainHeight = $('.label').height();
+            var mainHeight = Math.floor(ribbonSvgRight.height);
+            //var mainWidth = $('.label').width();
+            var mainWidth = svg.width();
+            //var ribbonHeight = Math.floor(getBounds("cssTableRight").width);
+            var rightTable = $('#cssTableRight');
+            var leftTable = $('#cssTableLeft');
+            var innerRotateWidth = Math.floor(getBounds("inner-rotate").width);
+            var innerRotateHeight = Math.floor(getBounds("inner-rotate").height);
+            var leftRb = $('.ribbon-left-middle-inner');
+            for (var key in ribbonProp) {
+                if (ribbonProp.hasOwnProperty(key)) {
+                    rightTable.css(key, ribbonProp[key]);
+                    leftTable.css(key, ribbonProp[key]);
+                    //leftRb.css(key, ribbonProp[key]);
+                }
+            }
+
+            ribbonLeft.css({
+                'top': Math.floor(mainHeight + ribbonSvgLeft.top) + 'px',
+                'left':Math.floor(ribbonSvgLeft.left) + 'px',  
+                'width': mainHeight + 'px'
             });
+
+            ribbonRight.css({
+                'top': Math.floor(mainHeight + ribbonSvgRight.top) + 'px',
+                'left':Math.floor(ribbonSvgRight.right) - innerRotateWidth -2  + 'px',  
+                'width': mainHeight + 'px'
+            });
+            
+            rightTable.css({
+                'height': innerRotateWidth + 'px',
+                'width': mainHeight + 'px'
+            });
+
+            leftTable.css({
+                //'height': innerRotateWidth + 'px',
+                'width': mainHeight + 'px'
+            });
+
+            $('.ribbon-right-bottom-box').css({
+                'width': innerRotateHeight + 'px',
+                'height': innerRotateWidth + 'px'
+            });
+    
+            $('.inner-rotate').css({
+                'width': innerRotateWidth + 'px',
+                'height': innerRotateHeight + 'px',
+                'right': -innerRotateWidth + 'px'
+            });	
+            
+        };
+        
+        function getBounds(ele){
+            var bounds = document.getElementById(ele).getBoundingClientRect();
+            //console.log(bounds);
+            //{left:bounds.left, top:bounds.top,  right:bounds.right, bottom:bounds.bottom}
+            return bounds;
+        }
+
+        $.ajax({
+            url: '@Url.Action("labelTemplate","LabelEditor")' + '/' + productId,
+            type: "GET",
+            dataType: 'json',
+            success: function (data) {
+                //pausecomp(5000);
+                templateActive = data.template;
+                loadTemplate();
+            },
+            error: function () {
+            },
+            async: false
+        });
 
 
     });

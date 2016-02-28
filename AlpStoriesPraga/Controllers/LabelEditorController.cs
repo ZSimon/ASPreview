@@ -14,6 +14,8 @@ using System.IO;
 using SelectPdf;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 
 namespace AlpStoriesPraga.Controllers
 {
@@ -29,6 +31,20 @@ namespace AlpStoriesPraga.Controllers
         [HttpPost, ValidateInput(false)]
         public JsonResult saveLabel(string productId, string svg)
         {
+            //HtmlDocument htmlDocument = new HtmlDocument();
+            //htmlDocument.LoadHtml(svg);
+            //foreach (var descendant in htmlDocument.DocumentNode.Descendants("metadata").ToList())
+            //    descendant.Remove();
+            Int32 startIndex = svg.IndexOf("<metadata", StringComparison.Ordinal);
+
+            if (startIndex != -1) {
+                var strToRemove = svg.Substring(startIndex, svg.IndexOf("</metadata>", StringComparison.Ordinal) - startIndex + 11);
+                svg = svg.Replace(strToRemove, "");
+            }
+            //svg = htmlDocument.DocumentNode.OuterHtml;
+
+            //svg=Regex.Replace(svg, @"(\</?metadata(.*?)/?\>)", string.Empty, RegexOptions.IgnoreCase);
+            //var svg1 = Regex.Replace(svg, @"<*metadata>", String.Empty, RegexOptions.IgnoreCase);
             String dimension;
             System.Web.HttpContext.Current.Session["custom"] = 1;
             if (System.Web.HttpContext.Current.Session["dimension"] == null)
@@ -96,7 +112,7 @@ namespace AlpStoriesPraga.Controllers
             else
             {
                 imgName = System.Web.HttpContext.Current.Session.SessionID + "_1.jpg";
-                p.StartInfo.Arguments = "--width 1772 " + url + " " + imgName;
+                p.StartInfo.Arguments = "--width 1784 " + url + " " + imgName;
             }
 
             System.Web.HttpContext.Current.Session["imgName"] = @"../" + ConfigurationManager.AppSettings["ExportImagePath"] + imgName;

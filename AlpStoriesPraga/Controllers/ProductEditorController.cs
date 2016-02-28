@@ -76,11 +76,11 @@ namespace AlpStoriesPraga.Controllers
                     //".\wkhtmltox\bin\wkhtmltopdf.exe" -T 0 -B 0 -L 0 -R 0  --page-width 96 --page-height 66 --dpi 300 --enable-javascript "http://localhost/AlpStoriesPraga/labelEditor/template/?folder=userTemplates&id=HP_girl_3" "d:\Temp\zd\wkhtml\wkhtmltox\test\test2.pdf"
                     pdfName = GenerateId() + ".pdf";
                     exportPath = ConfigurationManager.AppSettings["ExportPdfPath"];
-
+                    
                     if (System.Web.HttpContext.Current.Session["dimension"].ToString() == "3")
-                        p.StartInfo.Arguments = "-T 0 -B 0 -L 0 -R 0  --page-width 96 --page-height 66 --dpi 300 --enable-javascript " + url + " " + pdfName;
+                        p.StartInfo.Arguments = "--margin-top 0 --margin-bottom 0 --margin-left 0 --margin-right 0 --page-width 96mm --page-height 65mm --print-media-type --dpi 200 --enable-javascript " + url + " " + pdfName;
                     else
-                        p.StartInfo.Arguments = "-T 0 -B 0 -L 0 -R 0  --page-width 150 --page-height 126 --dpi 300 --enable-javascript " + url + " " + pdfName;
+                        p.StartInfo.Arguments = "-T 0 -B 0 -L 0 -R 0  --page-width 150 --page-height 125 --print-media-type --dpi 300 --enable-javascript " + url + " " + pdfName;
 
                     p.StartInfo.CreateNoWindow = true;
                     p.StartInfo.UseShellExecute = false; // needs to be false in order to redirect output
