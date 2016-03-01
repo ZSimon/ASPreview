@@ -50,6 +50,12 @@
     <Reference Include="Select.HtmlToPdf">
       <HintPath>..\packages\Select.HtmlToPdf.1.2.0.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.License">
+      <HintPath>..\packages\FreeSpire.PDF.3.2\lib\net40\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf">
+      <HintPath>..\packages\FreeSpire.PDF.3.2\lib\net40\Spire.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

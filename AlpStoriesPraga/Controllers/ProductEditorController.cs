@@ -65,12 +65,31 @@ namespace AlpStoriesPraga.Controllers
                     //create pdf
                     int lineCount = 0;
                     System.Text.StringBuilder output = new System.Text.StringBuilder();
-
+                    exportPath = ConfigurationManager.AppSettings["JpgToPdfDir"];
                     //string imageName = ConfigurationManager.AppSettings["ExportFilePath"] + outputFilename + ".jpg";
-                    string url = ConfigurationManager.AppSettings["UrlPdfPath"];
-                    url += folder + "&id=" + template.Split('/').Last();
-                    url = url.Substring(0, url.Length - 4);
-                    url = url + "&productId=" + productId;
+                    
+                    //string url = ConfigurationManager.AppSettings["UrlPdfPath"];
+                    //url += folder + "&id=" + template.Split('/').Last();
+                    //url = url.Substring(0, url.Length - 4);
+                    //url = url + "&productId=" + productId;
+
+                    String imgEnd = "_" + System.Web.HttpContext.Current.Session["dimension"].ToString()+".jpg";
+                    String url = Server.MapPath("~") + ConfigurationManager.AppSettings["ExportImagePath"] +
+                          System.Web.HttpContext.Current.Session.SessionID + imgEnd;
+
+                    //String url1 = @"d:\My Projects\AlpStoriesPraga\AlpStoriesPraga\Content\UserTemplates\LabelImg\mymkwwd44kkcrydvo3exehfx_3.jpg";
+
+                    var p = new System.Diagnostics.Process();
+                    p.StartInfo.Arguments = "\"" + url + "\" " + GenerateId();
+                    p.StartInfo.FileName = ConfigurationManager.AppSettings["JpgToPdfScript"];
+                    p.StartInfo.CreateNoWindow = true;
+                    p.StartInfo.UseShellExecute = false; // needs to be false in order to redirect output
+                    p.StartInfo.RedirectStandardOutput = true;
+                    p.StartInfo.RedirectStandardError = true;
+                    p.StartInfo.RedirectStandardInput = true;
+                    p.StartInfo.WorkingDirectory = exportPath;
+
+                    /*
                     var p = new System.Diagnostics.Process();
                     p.StartInfo.FileName = ConfigurationManager.AppSettings["HtmlToPdfExePath"];
                     //".\wkhtmltox\bin\wkhtmltopdf.exe" -T 0 -B 0 -L 0 -R 0  --page-width 96 --page-height 66 --dpi 300 --enable-javascript "http://localhost/AlpStoriesPraga/labelEditor/template/?folder=userTemplates&id=HP_girl_3" "d:\Temp\zd\wkhtml\wkhtmltox\test\test2.pdf"
@@ -78,7 +97,7 @@ namespace AlpStoriesPraga.Controllers
                     exportPath = ConfigurationManager.AppSettings["ExportPdfPath"];
                     
                     if (System.Web.HttpContext.Current.Session["dimension"].ToString() == "3")
-                        p.StartInfo.Arguments = "--margin-top 0 --margin-bottom 0 --margin-left 0 --margin-right 0 --page-width 96mm --page-height 65mm --print-media-type --dpi 200 --enable-javascript " + url + " " + pdfName;
+                        p.StartInfo.Arguments = "--margin-top 0 --margin-bottom 0 --margin-left 0 --margin-right 0 --page-width 96mm --page-height 65mm --print-media-type --dpi 300 --enable-javascript " + url + " " + pdfName;
                     else
                         p.StartInfo.Arguments = "-T 0 -B 0 -L 0 -R 0  --page-width 150 --page-height 125 --print-media-type --dpi 300 --enable-javascript " + url + " " + pdfName;
 
@@ -88,8 +107,8 @@ namespace AlpStoriesPraga.Controllers
                     p.StartInfo.RedirectStandardError = true;
                     p.StartInfo.RedirectStandardInput = true;
                     p.StartInfo.WorkingDirectory = exportPath;
-
-                    //p.OutputDataReceived += (object sender, DataReceivedEventArgs e) => error=e.Data;
+                    */
+                    
                     p.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
                     {
                         // Prepend line numbers to each line of the output.

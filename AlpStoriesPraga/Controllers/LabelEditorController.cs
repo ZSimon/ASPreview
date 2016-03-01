@@ -107,7 +107,7 @@ namespace AlpStoriesPraga.Controllers
             if (dimension == "3")
             {
                 imgName = System.Web.HttpContext.Current.Session.SessionID + "_3.jpg";
-                p.StartInfo.Arguments = "--width 1134 " + url + " " + imgName;
+                p.StartInfo.Arguments = "--width 1134 --height 768 " + url + " " + imgName;
             }
             else
             {
