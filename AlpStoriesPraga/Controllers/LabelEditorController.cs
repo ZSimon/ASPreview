@@ -190,8 +190,8 @@ namespace AlpStoriesPraga.Controllers
                         }
                     }
 
-                    label = label.Replace("ASTemplates", "TemplatesImg");
-                    label = label.Replace(".svg", ".jpg");
+                    //label = label.Replace("ASTemplates", "TemplatesImg");
+                    //label = label.Replace(".svg", ".jpg");
                     System.Web.HttpContext.Current.Session.Contents["label" + productId] = label;
                 }
                 else
@@ -281,7 +281,9 @@ namespace AlpStoriesPraga.Controllers
 
                 // Save the uploaded file to "UploadedFiles" folder
                 httpPostedFile.SaveAs(filePath);
-                String url = "http://"+Request.Url.Host + Url.Content("~/") + @"Content/UserTemplates/Img/" + fileName;
+                //String url = "http://"+Request.Url.Host + Url.Content("~/") + @"Content/UserTemplates/Img/" + fileName;
+
+                String url = Url.Content("~/") + @"Content/UserTemplates/Img/" + fileName;
                 return Json(new { success = true, msg = url });
             }
             else

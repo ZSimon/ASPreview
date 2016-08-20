@@ -1,5 +1,6 @@
 /**
  * init app variables
+ //check webGl: http://stackoverflow.com/questions/11871077/proper-way-to-detect-webgl-support
  */
 
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -22,7 +23,8 @@ var cameraLimit = 40;
 var currentTexture = ['data/img/logoimage.jpg', 'data/img/RepenGepolijst.jpg', 'data/img/template_10012.png'];
 var file = [
     ['large.obj', 'large.mtl'],
-    ['small.obj', 'small.mtl']
+    ['small.obj', 'small.mtl'],
+    ['bottle.obj', 'bottle.mtl']
 ];
 //var domain = location.href.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
 
@@ -80,14 +82,21 @@ $(document).ready(function () {
         type: "GET",
         dataType: 'json',
         success: function (data) {
-            var size = data.msg.slice(-5).charAt(0);
-            if (size == 1) {
-                curObj.curFile = file[0];
-                curObj.name[1] = "large";
+            if (data.msg.indexOf('240') !== -1) {
+                /*to do: add alu bottle*/
+                curObj.curFile = file[2];
+                curObj.name[1] = "aluminium";
             } else {
-                curObj.curFile = file[1];
-                curObj.name[1] = "small";
+                var size = data.msg.slice(-5).charAt(0);
+                if (size == 1) {
+                    curObj.curFile = file[0];
+                    curObj.name[1] = "large";
+                } else {
+                    curObj.curFile = file[1];
+                    curObj.name[1] = "small";
+                }
             }
+
             curObj.curText = data.msg;
 
             if (curObj.name) {
@@ -133,7 +142,11 @@ function Init() {
 
     //add camera
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100);
-    camera.position.set(0, 0, 3);
+    if (curObj.name[1] === 'aluminium')
+        camera.position.set(0, 0, 3.5);
+    else
+        camera.position.set(0, 0, 2.8);
+
     camera.lookAt(scene.position);
 
     //add lights
@@ -290,13 +303,16 @@ function onLoadModel(object) {
     if (can.childs.length === 0) {
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
-                
-                if (curObj.name[1] == 'small') {
+
+                if (curObj.name[1] === 'small') {
                     child.position.y = -0.45;
+                } else if (curObj.name[1] === 'aluminium'){
+                    child.position.set(2.7, -1, 2.4);
                 } else {
                     child.position.y = -0.75;
                 }
-                if (child.material.name == "nalepka" || child.material.name == "etiketa") {
+
+                if (child.material.name === "nalepka" || child.material.name ==="wire_115115115" || child.material.name === "etiketa") {
                     child.opacity = 1;
                     can.childs.push(child);
                 }

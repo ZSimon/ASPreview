@@ -220,17 +220,7 @@ body{
     -webkit-user-select: none;
     -moz-user-select: -moz-none;
 }
-.size-block{
-    display: table;
-    left: auto;
-    right: 0;
-}
-.size-block > *{
-    float: right;
-    margin: 0;
-    margin-left: 10px;
-    display: table-cell;
-}
+
 .prod-tabs-line{
     /*z-index: 1000;*/
     border-radius: 5px;
@@ -657,6 +647,7 @@ body{
 .purchase-area > div{
     float: right;
 }
+
 .match-to-my-profile,
 .create-label{
     float: left;
@@ -669,20 +660,53 @@ body{
     color: #225428;
     padding: 8px 11px;
     text-transform:uppercase;
-
     -webkit-transition: all .15s ease-in-out;
     transition: all .15s ease-in-out;
 }
+
 .create-label{
     left: 20px;
     position: relative;
     float: left;
 }
+
+/*.size-block{
+    display: table;
+    left: auto;
+    right: 0;
+}*/
+.size-block > *{
+    float: right;
+    margin: 0;
+    margin-left: 10px;
+    display: table-cell;
+}
+
+select.size-block {
+    position: relative;
+    float: left;
+    left: 70px;
+    font-size:13px;
+    top: auto;
+    bottom: 0;
+    cursor: pointer;
+    border: 2px solid #225428;
+    background: #fff;
+    color: #225428;
+    padding: 10px 11px;
+    max-width: 160px;
+}
+
+select.size-block option{
+    display:block;
+}
+
 .match-to-my-profile:hover,
 .create-label:hover{
     background: #225428;
     color: #fff;
 }
+
 .overview .prices{
     margin: 10px 5px;
     padding: 0px !important;

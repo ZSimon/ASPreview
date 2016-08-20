@@ -25,7 +25,6 @@ namespace AlpStoriesPraga.Controllers
             System.Text.StringBuilder output = new System.Text.StringBuilder();
             String exportPath = ConfigurationManager.AppSettings["JpgToPdfDir"];
 
-            String pdfName = "test";
             String url = @"d:\My Projects\AlpStoriesPraga\AlpStoriesPraga\Content\UserTemplates\LabelImg\mymkwwd44kkcrydvo3exehfx_3.jpg";
             var p = new System.Diagnostics.Process();
             p.StartInfo.Arguments = "\""+ url + "\" test";

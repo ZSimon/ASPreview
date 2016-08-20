@@ -34,7 +34,7 @@ $(document).ready(function(){
 
             setTimeout(function(){
                 //$_this.addClass('VisHidden');
-                openPanel($_this.data('product'), $panel);
+                openPanel($_this.data('product'), $_this.data('quantity'), $panel);
                 $productsSection.children().addClass('VisHidden');
                 $productRow.first().addClass('dispNone');
 
@@ -69,9 +69,9 @@ function getRand(min, max){
     return Math.round((Math.random() * (max - min)) + min);
 }
 
-function openPanel(product, $panel) {
+function openPanel(product, quantity, $panel) {
     //$3d_bottle.attr('src', "../3d_bottle/bottle3d.html?productId="+product)
-    SI = new smartIngredients(product,0);
+    SI = new smartIngredients(product, quantity);
     $panel.css({zIndex: 100}).addClass('show');
 }
 function closePanel($panel) {

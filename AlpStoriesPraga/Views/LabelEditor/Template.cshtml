@@ -22,7 +22,7 @@
                     <div class="css-cell ribbon-right-bottom">
                         <div class="ribbon-right-bottom-box">
                             <div class="inner-rotate" id="inner-rotate">
-                                <div class="productId">H10000260002412051630</div>
+                                <div class="productId"></div>
                                 <img alt="" id="imgBr">
                                 <div class="productPrice"></div>
                             </div>
@@ -70,7 +70,12 @@
                 'width': svg.width() +'px',
                 'height': svg.height()+'px'
             });
-
+            
+            if (svg.find('#text_background_left').length===0) {
+                return;
+            }
+                
+            
             
             // Get height and width of ribbons
             
@@ -116,10 +121,13 @@
             $('.productUsage').html(templateActive.usage);
 
             $('.ribbon-right-bottom img').attr('src', "../" + templateActive.barCode);// + templateActive.barCode);
-
+            $('.productId').html("H10000260002412051630");
             if (templateActive.price)
                 $('.productPrice').html("Price: "+templateActive.price +" eur");
             
+            var quantity = svg.find('#quantity');
+            quantity[0].textContent = templateActive.quantity + " ml" ;
+
             var ribbonSvgLeft = svg.find('#text_background_left')[0].getBoundingClientRect();
             var ribbonSvgRight = svg.find('#text_background_right')[0].getBoundingClientRect();
             

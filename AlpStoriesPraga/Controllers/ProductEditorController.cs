@@ -22,7 +22,7 @@ namespace AlpStoriesPraga.Controllers
         }
 
         [HttpGet]
-        public JsonResult createProduct(String productId, Decimal scent_q)
+        public JsonResult createProduct(String productId, Decimal scent_q, int quantity)
         {
             /*read price, svg and save to disk!*/
             //read template from session!)
@@ -78,9 +78,10 @@ namespace AlpStoriesPraga.Controllers
                           System.Web.HttpContext.Current.Session.SessionID + imgEnd;
 
                     //String url1 = @"d:\My Projects\AlpStoriesPraga\AlpStoriesPraga\Content\UserTemplates\LabelImg\mymkwwd44kkcrydvo3exehfx_3.jpg";
+                    pdfName = GenerateId();
 
                     var p = new System.Diagnostics.Process();
-                    p.StartInfo.Arguments = "\"" + url + "\" " + GenerateId();
+                    p.StartInfo.Arguments = "\"" + url + "\" " + pdfName;
                     p.StartInfo.FileName = ConfigurationManager.AppSettings["JpgToPdfScript"];
                     p.StartInfo.CreateNoWindow = true;
                     p.StartInfo.UseShellExecute = false; // needs to be false in order to redirect output
@@ -150,7 +151,7 @@ namespace AlpStoriesPraga.Controllers
                         cmd.Parameters.Add("@product_id", SqlDbType.NVarChar, 50).Value = productId;
                         cmd.Parameters.Add("@scLevel", SqlDbType.Float).Value = scLevel;
                         if (custom == 1)
-                            cmd.Parameters.Add("@filePath", SqlDbType.NVarChar, 500).Value = exportPath + pdfName;
+                            cmd.Parameters.Add("@filePath", SqlDbType.NVarChar, 500).Value = ConfigurationManager.AppSettings["ExportPdfPath"] + pdfName + ".pdf";
                         else
                             cmd.Parameters.Add("@filePath", SqlDbType.NVarChar, 500);
 

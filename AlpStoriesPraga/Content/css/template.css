@@ -59,7 +59,7 @@ body .label {
 .ribbon-left-middle-inner{ top: 5px;}
 
 .cs1{
-    width: 1784px;
+    width: 1784px;/*300*(151/25.4)*/
     margin-bottom: -4px;
 }
 
